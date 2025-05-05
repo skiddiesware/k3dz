@@ -35,37 +35,51 @@ local buttonList = {
     {
         Title = "Infinite Yield",
         Description = "IY",
-        URL = "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+        end
     },
     {
         Title = "LALOL",
         Description = "BACKDOOR",
-        URL = "https://raw.githubusercontent.com/Its-LALOL/LALOL-Hub/main/Backdoor-Scanner/script"
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Its-LALOL/LALOL-Hub/main/Backdoor-Scanner/script"))()
+        end
     },
     {
         Title = "MICRO",
         Description = "BACKDOOR",
-        URL = "https://paste.ee/r/GipgWZb8"
+        Callback = function()
+            loadstring(game:HttpGet("https://paste.ee/r/GipgWZb8"))()
+        end
     },
     {
         Title = "SolSpy",
         Description = "alternative of remoteSpy",
-        URL = "https://gist.githubusercontent.com/Uylost/960b592d7fc7161c3e6de0047547d874/raw/cc0e9ca436afe2c3e253fdb357d1a61efd576098/gistfile1.txt"
+        Callback = function()
+            loadstring(game:HttpGet("https://gist.githubusercontent.com/Uylost/960b592d7fc7161c3e6de0047547d874/raw/cc0e9ca436afe2c3e253fdb357d1a61efd576098/gistfile1.txt"))()
+        end
     },
     {
         Title = "freaky R6 Animations",
         Description = "freak",
-        URL = "https://raw.githubusercontent.com/ShutUpJamesTheLoser/freaky/refs/heads/main/fe"
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ShutUpJamesTheLoser/freaky/refs/heads/main/fe"))()
+        end
     },
     {
         Title = "FE R6 Animations",
         Description = "this one focus more on gameplay",
-        URL = "https://raw.githubusercontent.com/redxs-dosx/R6-Anim-Hub/refs/heads/main/Hub%20Script%20(.lua)"
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/redxs-dosx/R6-Anim-Hub/refs/heads/main/Hub%20Script%20(.lua)"))()
+        end
     },
     {
         Title = "Aqua FE R6 Animations",
         Description = "this is the best animation script with a ton of animations",
-        URL = "https://raw.githubusercontent.com/ExploitFin/AquaMatrix/refs/heads/AquaMatrix/AquaMatrix"
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ExploitFin/AquaMatrix/refs/heads/AquaMatrix/AquaMatrix"))()
+        end
     }
 }
 
@@ -73,11 +87,10 @@ for _, btn in pairs(buttonList) do
     Tabs.Main:AddButton({
         Title = btn.Title,
         Description = btn.Description,
-        Callback = function()
-            loadstring(game:HttpGet(btn.URL))()
-        end
+        Callback = btn.Callback
     })
 end
+
 
 -- Auto-Flashback Toggle
 local P = game:GetService("Players").LocalPlayer
@@ -95,7 +108,8 @@ local function s(c)
     end)
     task.spawn(function()
         c:WaitForChild("HumanoidRootPart")
-        if lastC then c.HumanoidRootPart.CFrame = lastC end
+        if lastC then c.HumanoidRootPart.CFrame = lastC
+        n("Flashback", tostring(lastC), "", 2)    end
     end)
 end
 
