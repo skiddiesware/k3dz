@@ -19,7 +19,10 @@ local Window = Fluent:CreateWindow({
 })
 
 -- tabs
-local Tabs = {}
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+    }
 for key, params in pairs(tabDefs) do
     Tabs[key] = Window:AddTab({ Title = params.Title, Icon = params.Icon })
 end
