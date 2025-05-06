@@ -66,7 +66,7 @@ return {
     {
         Title = "FE Blackhole",
         TabKey = "Main",
-        Description = "brute forces unanchored parts to a specific spot"
+        Description = "brute forces unanchored parts to a specific spot",
         Callback = function()
             loadstring(game:HttpGet("https://pastebin.com/raw/tstrtDFD"))()
         end
