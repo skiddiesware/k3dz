@@ -70,5 +70,45 @@ return {
         Callback = function()
             loadstring(game:HttpGet("https://pastebin.com/raw/tstrtDFD"))()
         end
+    },
+    {
+        Title = "Chairware",
+        TabKey = "stk",
+        Description = "chair",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Milan08Studio/ChairWare/main/main.lua"))()
+        end
+    },
+    {
+        Title = "?",
+        TabKey = "deadrails",
+        Description = "?",
+        Callback = function()
+
+        end
+    },
+    {
+        Title = "Grow A Garden",
+        TabKey = "garden",
+        Description = "grow a plant",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/ameicaa1/Grow-a-Garden/main/Grow_A_Garden.lua"))()
+        end
+    },
+    {
+        Title = "Butter V3",
+        TabKey = "lt2",
+        Description = "this script is butter ngl",
+        Callback = function()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/Butterisgood/Butter/main/Butter%20V3%20Testers.txt'))("")
+        end
+    },
+    {
+        Title = "?",
+        TabKey = "blrivals",
+        Description = "?",
+        Callback = function()
+
+        end
     }
 }
