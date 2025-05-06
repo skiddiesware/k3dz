@@ -1,6 +1,6 @@
-local Fluent           = loadstring(game:HttpGet("https://…/main.lua"))()
-local SaveManager      = loadstring(game:HttpGet("https://…/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://…/InterfaceManager.lua"))()
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 -- modular
 local buttonList = loadstring(game:HttpGet("https://raw.githubusercontent.com/skiddiesware/k3dz/refs/heads/main/return/dz_btn1.lua"))()
