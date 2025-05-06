@@ -48,11 +48,27 @@ return {
         end
     },
     {
-        Title = "Aqua FE R6 Animations",
+        Title = "AquaMatrix FE R6 Animations",
         TabKey = "Main",
         Description = "this is the best animation script with a ton of animations",
         Callback = function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ExploitFin/AquaMatrix/refs/heads/AquaMatrix/AquaMatrix"))()
+        end
+    },
+    {
+        Title = "FE Super Ring",
+        TabKey = "Main",
+        Description = "have you seen those unanchored rings circling a player in nds? well it was this script",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/chesslovers69/Super-ring-parts-v6/refs/heads/main/Bylukaslol"))()
+        end
+    },
+    {
+        Title = "FE Blackhole",
+        TabKey = "Main",
+        Description = "brute forces unanchored parts to a specific spot"
+        Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/tstrtDFD"))()
         end
     }
 }
