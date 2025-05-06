@@ -80,11 +80,11 @@ return {
         end
     },
     {
-        Title = "?",
+        Title = "Oblivion",
         TabKey = "deadrail",
-        Description = "?",
+        Description = "rails",
         Callback = function()
-
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Vexsonic/Scripts/master/Oblivion-hub.lua"))()
         end
     },
     {
