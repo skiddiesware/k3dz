@@ -1,153 +1,69 @@
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local Fluent           = loadstring(game:HttpGet("https://…/main.lua"))()
+local SaveManager      = loadstring(game:HttpGet("https://…/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://…/InterfaceManager.lua"))()
 
-local skidzVersion = "1.3"
+-- modular
+local buttonList = loadstring(game:HttpGet("https://raw.githubusercontent.com/skiddiesware/k3dz/refs/heads/main/return/dz_btn1.lua"))()
+local tabDefs    = loadstring(game:HttpGet("https://raw.githubusercontent.com/skiddiesware/k3dz/refs/heads/main/return/dz_tab1.lua"))()
+local toggles    = loadstring(game:HttpGet("https://raw.githubusercontent.com/skiddiesware/k3dz/refs/heads/main/return/dz_toggle1.lua"))()
+local sliders    = loadstring(game:HttpGet("https://raw.githubusercontent.com/skiddiesware/k3dz/refs/heads/main/return/dz_slider1.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "K3DZ " .. skidzVersion,
-    SubTitle = "by skiddies",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftAlt
+    Title      = "K3DZ - by skiddies",
+    SubTitle   = tostring(identifyexecutor()) or "",
+    TabWidth   = 160,
+    Size       = UDim2.fromOffset(580,460),
+    Acrylic    = false,
+    Theme      = "Dark",
+    MinimizeKey= Enum.KeyCode.LeftControl
 })
 
-local Tabs = {
-    Main = Window:AddTab({ Title = "Universal", Icon = "" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
-}
-
-local Options = Fluent.Options
-
-local function n(t, c, s, d)
-    Fluent:Notify({
-        Title = t,
-        Content = c,
-        SubContent = s,
-        Duration = d
-    })
+-- tabs
+local Tabs = {}
+for key, params in pairs(tabDefs) do
+    Tabs[key] = Window:AddTab({ Title = params.Title, Icon = params.Icon })
 end
 
--- Buttons
-local buttonList = {
-    {
-        Title = "Infinite Yield",
-        Description = "IY",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-        end
-    },
-    {
-        Title = "LALOL",
-        Description = "BACKDOOR",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Its-LALOL/LALOL-Hub/main/Backdoor-Scanner/script"))()
-        end
-    },
-    {
-        Title = "MICRO",
-        Description = "BACKDOOR",
-        Callback = function()
-            loadstring(game:HttpGet("https://paste.ee/r/GipgWZb8"))()
-        end
-    },
-    {
-        Title = "SolSpy",
-        Description = "alternative of remoteSpy",
-        Callback = function()
-            loadstring(game:HttpGet("https://gist.githubusercontent.com/Uylost/960b592d7fc7161c3e6de0047547d874/raw/cc0e9ca436afe2c3e253fdb357d1a61efd576098/gistfile1.txt"))()
-        end
-    },
-    {
-        Title = "freaky R6 Animations",
-        Description = "freak",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ShutUpJamesTheLoser/freaky/refs/heads/main/fe"))()
-        end
-    },
-    {
-        Title = "FE R6 Animations",
-        Description = "this one focus more on gameplay",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/redxs-dosx/R6-Anim-Hub/refs/heads/main/Hub%20Script%20(.lua)"))()
-        end
-    },
-    {
-        Title = "Aqua FE R6 Animations",
-        Description = "this is the best animation script with a ton of animations",
-        Callback = function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ExploitFin/AquaMatrix/refs/heads/AquaMatrix/AquaMatrix"))()
-        end
-    }
-}
-
-for _, btn in pairs(buttonList) do
-    Tabs.Main:AddButton({
-        Title = btn.Title,
+-- buttons
+for _, btn in ipairs(buttonList) do
+    Tabs[btn.TabKey]:AddButton({
+        Title       = btn.Title,
         Description = btn.Description,
-        Callback = btn.Callback
+        Callback    = btn.Callback
     })
 end
 
-
--- Auto-Flashback Toggle
-local P = game:GetService("Players").LocalPlayer
-local lastC
-
-local toggle = Tabs.Main:AddToggle("Auto-Flashback", {
-    Title = "Auto-Flashback",
-    Default = false
-})
-
-local function s(c)
-    c:WaitForChild("Humanoid").Died:Connect(function()
-        local r = c:FindFirstChild("HumanoidRootPart")
-        if r then lastC = r.CFrame end
-    end)
-    task.spawn(function()
-        c:WaitForChild("HumanoidRootPart")
-        if lastC then c.HumanoidRootPart.CFrame = lastC
-        n("Flashback", tostring(lastC), "", 2)    end
-    end)
+-- toggles
+for _, tog in ipairs(toggles) do
+    local widget = Tabs[tog.TabKey]:AddToggle(tog.Name, {
+        Title   = tog.Title,
+        Default = tog.Default
+    })
+    widget:OnChanged(tog.OnChanged)
 end
 
-toggle:OnChanged(function(v)
-    if v then
-        if P.Character then s(P.Character) end
-        P.CharacterAdded:Connect(s)
-    else
-        lastC = nil
-    end
-end)
+-- sliders
+for _, sld in ipairs(sliders) do
+    Tabs[sld.TabKey]:AddSlider(sld.Name, {
+        Title       = sld.Title,
+        Description = sld.Description,
+        Default     = sld.Default,
+        Min         = sld.Min,
+        Max         = sld.Max,
+        Rounding    = sld.Rounding,
+        Callback    = sld.Callback
+    })
+end
 
--- WalkSpeed Slider
-Tabs.Main:AddSlider("Slider", {
-    Title = "WalkSpeed",
-    Description = "quick slider",
-    Default = 16,
-    Min = 0,
-    Max = 256,
-    Rounding = 1,
-    Callback = function(Value)
-        local humanoid = P.Character and P.Character:FindFirstChildWhichIsA("Humanoid")
-        if humanoid then
-            humanoid.WalkSpeed = Value
-        end
-    end
-})
-
--- Addons Setup
+-- addons
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
 SaveManager:IgnoreThemeSettings()
-SaveManager:SetIgnoreIndexes({})
 InterfaceManager:SetFolder("K3DZ")
 SaveManager:SetFolder("K3DZ")
-
 InterfaceManager:BuildInterfaceSection(Tabs.Settings)
 SaveManager:BuildConfigSection(Tabs.Settings)
+
 
 Window:SelectTab(1)
 SaveManager:LoadAutoloadConfig()
