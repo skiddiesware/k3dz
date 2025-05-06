@@ -81,7 +81,7 @@ return {
     },
     {
         Title = "?",
-        TabKey = "deadrails",
+        TabKey = "deadrail",
         Description = "?",
         Callback = function()
 
